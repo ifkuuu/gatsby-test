@@ -19,6 +19,9 @@ module.exports = {
       resolve: `gatsby-source-drupal`,
       options: {
         baseUrl: process.env.DRUPAL_URL,
+        headers: {
+          'api-key': process.env.JSON_API_KEY
+        },
         apiBase: 'jsonapi',
         fastBuilds: true,
       },
