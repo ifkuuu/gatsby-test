@@ -15,6 +15,14 @@ module.exports = {
     siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
   },
   plugins: [
+    {
+      resolve: `gatsby-source-drupal`,
+      options: {
+        baseUrl: process.env.DRUPAL_URL,
+        apiBase: 'jsonapi',
+        fastBuilds: true,
+      },
+    },
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,

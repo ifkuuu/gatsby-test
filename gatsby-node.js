@@ -1,18 +1,47 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/
- */
+const path = require(`path`);
 
-/**
- * @type {import('gatsby').GatsbyNode['createPages']}
- */
-exports.createPages = async ({ actions }) => {
-  const { createPage } = actions
-  createPage({
-    path: "/using-dsg",
-    component: require.resolve("./src/templates/using-dsg.js"),
-    context: {},
-    defer: true,
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions;
+
+  return new Promise((resolve, reject) => {
+    graphql(`
+      {
+        allNodeContributor {
+          edges {
+            node {
+              drupal_id,
+              title,
+              path {
+                alias,
+              }
+            }
+          }
+        }
+      }
+    `).then(result => {
+      result.data.allNodeContributor.edges.forEach(({ node }) => {
+        let path_alias;
+        if (node.path.alias == null) {
+          path_alias = `node/${node.drupal_id}`;
+        } else {
+          path_alias = node.path.alias;
+        }
+
+        createPage({
+          // This is the path, or route, at which the page will be visible.
+          path: path_alias,
+          // This the path to the file that contains the React component
+          // that will be used to render the HTML for the recipe.
+          component: path.resolve(`./src/templates/node-template.js`),
+          context: {
+            // Data passed to context is available in page queries as GraphQL
+            // variables.
+            drupal_id: node.drupal_id,
+          },
+        })
+      });
+
+      resolve()
+    })
   })
-}
+};
