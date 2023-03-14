@@ -24,7 +24,7 @@ module.exports = {
           password: process.env.BASIC_AUTH_PASSWORD,
         },
         apiBase: 'jsonapi',
-        // fastBuilds: true,
+        fastBuilds: true,
       },
     },
     `gatsby-plugin-image`,
