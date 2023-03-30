@@ -1,0 +1,29 @@
+name: gatsby
+
+proxy:
+  appserver:
+    - gatsby.lndo.site:8000
+
+services:
+  appserver:
+    ssl: true
+    type: node:14
+    port: '8000'
+    command: gatsby develop --host 0.0.0.0
+    overrides:
+      image: node:18
+      environment:
+        ENABLE_GATSBY_REFRESH_ENDPOINT: "true"
+    install_dependencies_as_me:
+      - yarn global add gatsby-cli
+      - yarn
+
+tooling:
+  yarn:
+    service: appserver
+  gatsby:
+    service: appserver
+  node:
+    service: appserver
+  npm:
+    service: appserver
