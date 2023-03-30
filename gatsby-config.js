@@ -18,13 +18,12 @@ module.exports = {
     {
       resolve: `gatsby-source-drupal`,
       options: {
-        baseUrl: process.env.DRUPAL_URL,
-        basicAuth: {
-          username: process.env.BASIC_AUTH_USERNAME,
-          password: process.env.BASIC_AUTH_PASSWORD,
-        },
-        apiBase: 'jsonapi',
-        fastBuilds: true,
+        baseUrl: `http://baywsfnexgen.lndo.site`,
+        // headers: {
+        //   'api-key': 'c1cd1a4619dfc6718ace86aad9a22bbc',
+        // },
+        apiBase: 'api',
+        // fastBuilds: true,
       },
     },
     `gatsby-plugin-image`,

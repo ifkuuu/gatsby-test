@@ -3,12 +3,13 @@ import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 
 const ContributorTemplate = (props) => {
-  const { nodeContributor: contributor } = props.data;
+  const { nodeContributor: contributor, simpleConfigurationSystemSite: config } = props.data;
 
 
   return (
     <Layout >
       <div>Person name: {contributor.field_first_name.value}</div>
+      <div>Config text: {config.copyright_text}</div>
       {/*<Helmet*/}
       {/*  title={`Umami - ${recipe.title}`}*/}
       {/*  meta={[*/}
@@ -38,7 +39,7 @@ export default ContributorTemplate;
 export const query = graphql`
   query ContributorQuery($drupal_id: String!) {
     nodeContributor(drupal_id: {eq: $drupal_id}) {
-      field_first_name {
+      first_name {
         value
       }
     }
