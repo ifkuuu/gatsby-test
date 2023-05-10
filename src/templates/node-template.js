@@ -3,13 +3,13 @@ import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 
 const ContributorTemplate = (props) => {
-  const { nodeContributor: contributor, simpleConfigurationSystemSite: config } = props.data;
+  const { nodeContributor: contributor } = props.data;
 
 
   return (
     <Layout >
-      <div>Person name: {contributor.field_first_name.value}</div>
-      <div>Config text: {config.copyright_text}</div>
+      <div>Person name: {contributor.first_name.value}</div>
+      {/*<div>Config text: {config.copyright_text}</div>*/}
       {/*<Helmet*/}
       {/*  title={`Umami - ${recipe.title}`}*/}
       {/*  meta={[*/}

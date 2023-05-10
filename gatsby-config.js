@@ -4,6 +4,11 @@
  * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/
  */
 
+require("dotenv").config();
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
@@ -18,12 +23,12 @@ module.exports = {
     {
       resolve: `gatsby-source-drupal`,
       options: {
-        baseUrl: `http://baywsfnexgen.lndo.site`,
-        // headers: {
-        //   'api-key': 'c1cd1a4619dfc6718ace86aad9a22bbc',
-        // },
+        baseUrl: process.env.DRUPAL_BASE_URL,
+        headers: {
+          'api-key': process.env.JSON_API_KEY,
+        },
         apiBase: 'api',
-        // fastBuilds: true,
+        fastBuilds: true,
       },
     },
     `gatsby-plugin-image`,
